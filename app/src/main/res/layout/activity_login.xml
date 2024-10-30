@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    android:orientation="vertical">
+    <ImageView
+        android:id="@+id/App_Icon"
+        android:contentDescription="@null"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/splash"
+        />
+    <TextView
+        android:layout_marginTop="10sp"
+        android:id="@+id/signIn"
+        android:text="로그인"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font_title"
+        android:layout_marginStart="10sp"
+        android:textSize="25sp"
+        android:textColor="#000000"
+        />
+    <EditText
+        android:importantForAutofill="no"
+        tools:targetApi="o"
+        android:id="@+id/login_id"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:fontFamily="@font/font_content"
+        android:textSize="20sp"
+        android:layout_marginStart="10sp"
+        android:layout_marginTop="10sp"
+        android:hint="아이디를 입력해주세요"
+        android:inputType="text"
+        android:maxLength="15"
+        android:ems="15"
+        />
+    <EditText
+        android:importantForAutofill="no"
+        tools:targetApi="o"
+        android:id="@+id/login_pw"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:fontFamily="@font/font_content"
+        android:textSize="20sp"
+        android:layout_marginStart="10sp"
+        android:layout_marginTop="5sp"
+        android:hint="비밀번호를 입력해주세요"
+        android:maxLength="15"
+        android:ems="15"
+        android:inputType="textPassword"
+        />
+    <LinearLayout
+        android:layout_marginTop="5sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        >
+    <Button
+        android:layout_width="98dp"
+        android:layout_height="50dp"
+        android:text="로그인"
+        android:id="@+id/login_btn"
+        />
+
+    <ImageButton
+        android:id="@+id/kakaobutton"
+        tools:ignore="SpeakableTextPresentCheck"
+        android:contentDescription="@null"
+        android:layout_width="98dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/kakao_login_medium"
+         />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5sp"
+        android:layout_marginStart="10sp"
+        android:layout_marginEnd="10sp">
+
+        <TextView
+            android:id="@+id/login_new"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="아직 회원이 아니신가요?"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:fontFamily="@font/font_content"
+            android:gravity="start"
+            />
+
+        <TextView
+            android:id="@+id/login_forget"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="회원 정보가 기억이 안나나요?"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:fontFamily="@font/font_content"
+            android:gravity="end"
+            />
+    </LinearLayout>
+
+</LinearLayout>
