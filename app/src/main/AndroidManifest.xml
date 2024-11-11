@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!--블루투스 권한 추가-->
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <!-- 블루투스 권한 추가 -->
+    <uses-permission android:name="android.permission.BLUETOOTH"
+        android:maxSdkVersion="30"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"
+        android:maxSdkVersion="30"/>
+    <!-- 위치 권한 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
 
-
     <application
+        android:name=".BluetoothApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -23,13 +26,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme._1215DDAY"
         tools:targetApi="31">
-
         <activity
             android:name=".SplashActivity"
             android:exported="true"
             android:theme="@style/SplashTheme"> <!-- SplashTheme 사용 -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -37,22 +40,17 @@
             android:name=".LoginActivity"
             android:exported="false"
             android:label="@string/app_name"
-            android:theme="@style/Theme._1215DDAY">
-        </activity>
+            android:theme="@style/Theme._1215DDAY"></activity>
         <activity
             android:name=".BluetoothActivity"
             android:exported="false"
             android:label="1225DDAY"
-            android:theme="@style/Theme._1215DDAY"
-            >
-        </activity>
+            android:theme="@style/BluetoothActivity"></activity>
         <activity
             android:name=".FragmentActivity"
             android:exported="false"
             android:label="1225DDAY"
-            android:theme="@style/FragmentActivity"
-            >
-        </activity>
+            android:theme="@style/FragmentActivity"></activity>
     </application>
 
 </manifest>

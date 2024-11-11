@@ -20,10 +20,13 @@ public class FragmentActivity extends AppCompatActivity{
     Fragment statisticsFr;
     Fragment accountFr;
 
+    BluetoothManager blmanager;
     // 메인 페이지 AppCompatActivity를 중심으로
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("시작", "블루투스 소켓 닫히는 시점 파악 시작 2");
+        blmanager = BluetoothManager.getInstance();
         binding = ActivityFragmentMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         viewPager2 = binding.mainPageFrame;
