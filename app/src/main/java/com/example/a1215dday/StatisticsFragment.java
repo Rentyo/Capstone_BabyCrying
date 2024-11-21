@@ -1,6 +1,7 @@
 package com.example.a1215dday;
 
 import android.app.AlertDialog;
+import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -49,6 +50,9 @@ public class StatisticsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        BluetoothManager blmanager = BluetoothManager.getInstance();
+        Log.d("statics",String.valueOf(blmanager.getBluetoothSocket().isConnected()));
         binding = FragmentStatisticsBinding.inflate(getLayoutInflater());
         selectbtn = binding.chartChanger;
 

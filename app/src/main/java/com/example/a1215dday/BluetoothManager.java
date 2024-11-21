@@ -1,18 +1,32 @@
 package com.example.a1215dday;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
 import android.util.Log;
 import android.widget.Toast;
+import android.Manifest;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -26,6 +40,7 @@ public class BluetoothManager {
     private BluetoothDevice connectedDevice;
     private BluetoothSocket bluetoothSocket;
 
+    private Service service;
     //블루투스 핸들러
     Handler mBluetoothHandler;
     //블루투스 연결 스레드
@@ -33,6 +48,16 @@ public class BluetoothManager {
     //블루투스 디바이스 목록
     Set<BluetoothDevice> deviceSet = new HashSet<>();
 
+    // 알림
+    private static String CHANNEL_ID = "baby_crying_detect";
+
+    final static String notiTitle = "Hear4You 감지";
+    final static String notiText = "아이 울음 소리가 감지되었습니다.";
+    final static String notiTextbel = "아이 울음 소리 종류는 복통입니다.";
+    final static String notiTextdis = "아이 울음 소리 종류는 불편함입니다.";
+    final static String notiTexthun = "아이 울음 소리 종류는 배고픔입니다.";
+    final static String notiTexttir = "아이 울음 소리 종류는 피곤함입니다.";
+    NotificationCompat.Builder builder;
 
     private BluetoothManager() {
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -43,24 +68,94 @@ public class BluetoothManager {
                     String readMessage = null;
                     readMessage = new String((byte[]) msg.obj,0 ,msg.arg1, StandardCharsets.UTF_8);
                     Log.d("readmessage", readMessage);
-
+                    Date date = new Date();
+                    // 원하는 형식으로 포맷
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    String formattedDateTime = formatter.format(date);
+                    NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(service);
+                    builder = new NotificationCompat.Builder(service, CHANNEL_ID)
+                            .setSmallIcon(R.drawable.splash)
+                            .setContentTitle(notiTitle)
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT);
                     // 알림
                     switch(readMessage) {
+                        case "아이 울음 소리 감지" :
+                            builder.setContentText( notiText);
+                            builder.setStyle(new NotificationCompat.BigTextStyle()
+                                .bigText(formattedDateTime + "\n" + notiText));
+                            try{
+                                //NOTIFIYCATION ID 101
+                                notificationManagerCompat.notify(101, builder.build());
+                            }catch (SecurityException e){
+                                Log.d("알림 오류", e.toString());
+                            }
+                            break;
                         case "bellypain" :
+                            builder.setContentText(notiTextbel);
+                            builder.setStyle(new NotificationCompat.BigTextStyle()
+                                    .bigText(formattedDateTime + "\n" + notiTextbel));
+                            try{
+                                //NOTIFIYCATION ID 101
+                                notificationManagerCompat.notify(102, builder.build());
+                            }catch (SecurityException e){
+                                Log.d("알림 오류", e.toString());
+                            }
                             break;
                         case "discomfort" :
+                            builder.setContentText(notiTextdis);
+                            builder.setStyle(new NotificationCompat.BigTextStyle()
+                                    .bigText(formattedDateTime + "\n" + notiTextdis));
+                            try{
+                                //NOTIFIYCATION ID 101
+                                notificationManagerCompat.notify(103, builder.build());
+                            }catch (SecurityException e){
+                                Log.d("알림 오류", e.toString());
+                            }
                             break;
                         case "hungry":
+                            builder.setContentText(notiTexthun);
+                            builder.setStyle(new NotificationCompat.BigTextStyle()
+                                    .bigText(formattedDateTime + "\n" + notiTexthun));
+                            try{
+                                //NOTIFIYCATION ID 101
+                                notificationManagerCompat.notify(104, builder.build());
+                            }catch (SecurityException e){
+                                Log.d("알림 오류", e.toString());
+                            }
                             break;
                         case "tired":
+                            builder.setContentText(notiTexttir);
+                            builder.setStyle(new NotificationCompat.BigTextStyle()
+                                    .bigText(formattedDateTime + "\n" + notiTexttir));
+                            try{
+                                //NOTIFIYCATION ID 101
+                                notificationManagerCompat.notify(105, builder.build());
+                            }catch (SecurityException e){
+                                Log.d("알림 오류", e.toString());
+                            }
                             break;
 
                     }
                 }
             }
         };
-
     }
+    public void createNotificationChannel(Context context) {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is not in the Support Library.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "채널이름";
+            String description = "채널설명";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this.
+            NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
 
     // 싱글턴 인스턴스 가져오기
     public static synchronized BluetoothManager getInstance() {
@@ -70,7 +165,7 @@ public class BluetoothManager {
         return instance;
     }
     public BluetoothAdapter getBluetoothAdapter() { return bluetoothAdapter; }
-
+    public Handler getBluetoothHandler() {return mBluetoothHandler;}
     public void addDevice(BluetoothDevice device){
         deviceSet.add(device);
     }
@@ -88,20 +183,29 @@ public class BluetoothManager {
 
     // 연결 해제 메서드
     public void disconnect() {
-        try {
-            if (bluetoothSocket != null && bluetoothSocket.isConnected()) {
+        if (bluetoothSocket != null && bluetoothSocket.isConnected()) {
+            try {
                 bluetoothSocket.close();
-                bluetoothSocket = null;
-                connectedDevice = null;
+                Log.d("BluetoothManager", "Device disconnected");
+            } catch (IOException e) {
+                Log.e("BluetoothManager", "Failed to disconnect", e);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } else {
+            Log.d("BluetoothManager", "No connection to disconnect");
         }
     }
-    void connectSelectedDevice(String selectedDeviceName) {
+    void connectSelectedDevice(String selectedDeviceName, Service service) {
+//
+//        Intent intent = new Intent(context, BluetoothActivity.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+
+        this.service = service;
+
         BluetoothDevice mBluetoothDevice = null;
         for(BluetoothDevice tempDevice : deviceSet) {
             try {
+
                 if (selectedDeviceName.equals(tempDevice.getName())) {
                     mBluetoothDevice = tempDevice;
                     Log.d("blDevice", mBluetoothDevice.toString());
@@ -128,6 +232,7 @@ public class BluetoothManager {
                 if (bluetoothSocket != null && bluetoothSocket.isConnected()) {
                     Log.d("Bluetooth", "Already connected");
                 } else {
+                    //그럼 여기서
                     mThreadConnectedBluetooth = new ConnectedBluetoothThread(bluetoothSocket);
                     mThreadConnectedBluetooth.start();
                     mBluetoothHandler.obtainMessage(BT_CONNECTING_STATUS, 1, -1).sendToTarget();
@@ -143,7 +248,7 @@ public class BluetoothManager {
                 boolean isBonded = mBluetoothDevice.createBond();
                 if (isBonded) {
                     Log.d("페어링", "페어링 시작");
-                    connectSelectedDevice(mBluetoothDevice.getName());
+                    connectSelectedDevice(mBluetoothDevice.getName(), service);
                 } else {
                     Log.d("페어링", "페어링 실패");
                 }
@@ -184,7 +289,9 @@ public class BluetoothManager {
             OutputStream tmpOut = null;
 
             try {
-                mmSocket.connect();
+                if (!bluetoothSocket.isConnected()) {
+                    mmSocket.connect();
+                }
                 // 연결 성공 후 추가 작업
             } catch (IOException e) {
                 Log.e("Bluetooth", "Connection failed", e);
@@ -244,4 +351,6 @@ public class BluetoothManager {
             }
         }
     }
+
+
 }

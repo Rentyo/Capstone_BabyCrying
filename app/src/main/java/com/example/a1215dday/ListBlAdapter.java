@@ -2,6 +2,8 @@ package com.example.a1215dday;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -14,12 +16,15 @@ import android.widget.TextView;
 
 
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.app.ActivityCompat;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class ListBlAdapter extends BaseAdapter {
+
+    private static final int SINGLE_PERMISSION =1004;
     private ArrayList<ListBl> list = new ArrayList<ListBl>();
     private Context context;
 
@@ -70,10 +75,27 @@ public class ListBlAdapter extends BaseAdapter {
                         for (int i = 0; i < selectedBl.size(); i++) {
                             selectedBl.put(i, i == position);  // 현재 스위치만 켜고 나머지는 끄기
                         }
-//                         BluetoothActivity의 메서드 호출
-//                        ((BluetoothActivity) context).disconnectpreDevice();
-                        //((BluetoothActivity) context).connectSelectedDevice(list.get(position).getName());
-                        blmanager.connectSelectedDevice(list.get(position).getName());
+                        //서비스 호출
+                        Intent intent = new Intent(context, BluetoothService.class);
+                        intent.putExtra("BluetoothDevice",list.get(position).getName());
+                        if (ActivityCompat.checkSelfPermission(
+                                context,
+                                android.Manifest.permission.POST_NOTIFICATIONS
+                        ) != PackageManager.PERMISSION_GRANTED
+                        ) {
+                            // 권한 요청
+                            ActivityCompat.requestPermissions(
+                                    (BluetoothActivity)context,
+                                    new String[]{android.Manifest.permission.POST_NOTIFICATIONS}
+                                    , SINGLE_PERMISSION
+                            );
+                        } else {
+                            // 이미 권한이 있으면 서비스 시작
+                            context.startService(intent);
+                        }
+                        //이거 뷰에서 컨텍스트 얻어올수있는거 맞지?
+                        // 그럼  if문에서 막혀서 연결이 안되야 하는데 연결은 가능...
+//                        blmanager.connectSelectedDevice(list.get(position).getName());
                         notifyDataSetChanged();
                     }
                 }

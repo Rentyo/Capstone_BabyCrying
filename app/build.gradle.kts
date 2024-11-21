@@ -92,6 +92,8 @@ dependencies {
     //Chart
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
+    //알림
+//    implementation("androidx.core:core-ktx:2.2.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")

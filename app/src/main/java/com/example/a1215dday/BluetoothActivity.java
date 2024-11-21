@@ -114,7 +114,7 @@ public class BluetoothActivity extends ComponentActivity {
                 if(v.getId() == R.id.settingCButton){
                     //1. 블루투스 세팅
                     Log.d("시작", "블루투스 소켓 닫히는 시점 파악 시작 1");
-                    //4. BlueTooth Activity로 이동
+                    //4. Fragment Activity로 이동
                     Intent intent = new Intent(BluetoothActivity.this,FragmentActivity.class); //LoginActivity.class);
                     startActivity(intent);
                     finish();
@@ -188,7 +188,14 @@ public class BluetoothActivity extends ComponentActivity {
     @Override
     protected void onDestroy() {
         //Toast.makeText(getApplicationContext(), "onDestroy called", Toast.LENGTH_SHORT).show();
-        Log.d("onDestroy", "onDestroy called");
+        Log.d("onDestroy", String.valueOf(blManager.getBluetoothSocket().isConnected()));
+        try{
+            Log.d("onDestroy", String.valueOf(blManager.getBluetoothSocket().getInputStream()));
+            Log.d("onDestroy", String.valueOf(blManager.getBluetoothSocket().getOutputStream()));
+        }
+        catch (IOException e){
+            Log.d("onDestroy" , e.toString());
+        }
         super.onDestroy();
         unregisterReceiver(mBroadCastReceiver);
         //mThreadConnectedBluetooth.cancel();
