@@ -149,9 +149,9 @@ public class BluetoothActivity extends ComponentActivity {
     {
         arrayList = new ArrayList<ListBl>();
 
-        arrayList.add(new ListBl("블루투스1","시간1",1,2,R.drawable.splash));
-        arrayList.add(new ListBl("블루투스2","시간2",2,2,R.drawable.splash));
-        arrayList.add(new ListBl("블루투스3","시간3",3,2,R.drawable.splash));
+        arrayList.add(new ListBl("블루투스1","시간1",false,2,R.drawable.splash));
+        arrayList.add(new ListBl("블루투스2","시간2",false,2,R.drawable.splash));
+        arrayList.add(new ListBl("블루투스3","시간3",false,2,R.drawable.splash));
     }
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void checkBTPermissions(){
@@ -316,7 +316,7 @@ public class BluetoothActivity extends ComponentActivity {
                     arrayList.clear();
                     blManager.getDeviceSet().forEach(obj -> {
                         try{
-                            arrayList.add(new ListBl(obj.getName(), obj.getAddress(),0,0,R.drawable.splash));
+                            arrayList.add(new ListBl(obj.getName(), obj.getAddress(),false,0,R.drawable.splash));
                         } catch (SecurityException e){
                             Log.d("error ArrayList", e.toString());
                         }

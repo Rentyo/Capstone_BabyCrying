@@ -3,14 +3,14 @@ package com.example.a1215dday;
 public class ListBl {
     String Name;
     String time;
-    int ingredients;
+    boolean isChecked;
     int desc;
     int image;
 
-    public ListBl(String name, String time, int ingredients, int desc, int image){
+    public ListBl(String name, String time, boolean isChecked, int desc, int image){
         this.Name = name;
         this.time = time;
-        this.ingredients = ingredients;
+        this.isChecked = isChecked;
         this.desc = desc;
         this.image = image;
     }
@@ -20,15 +20,14 @@ public class ListBl {
         return this.Name;
     }
 
-    public String getTime()
+    public boolean getChecked()
     {
-        return this.time;
+        return this.isChecked;
+    }
+    public void setChecked(boolean isChecked){
+        this.isChecked = isChecked;
     }
 
-    public int getIngredients()
-    {
-        return this.ingredients;
-    }
     public int getImage()
     {
         return this.image;

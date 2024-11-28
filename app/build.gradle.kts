@@ -9,7 +9,8 @@ android {
 
     defaultConfig {
         applicationId = "com.example.a1215dday"
-        minSdk = 24
+        //minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -92,8 +93,14 @@ dependencies {
     //Chart
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
-    //알림
-//    implementation("androidx.core:core-ktx:2.2.0")
+    //Room
+    val room_version = "2.6.1"
+
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+
+    //Room Viewer
+    debugImplementation("com.github.amitshekhariitbhu.Android-Debug-Database:debug-db:1.0.7")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")

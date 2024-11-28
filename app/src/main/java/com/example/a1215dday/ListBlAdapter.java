@@ -1,9 +1,12 @@
 package com.example.a1215dday;
 
 import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -17,6 +20,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +32,13 @@ public class ListBlAdapter extends BaseAdapter {
     private ArrayList<ListBl> list = new ArrayList<ListBl>();
     private Context context;
 
-    private SparseBooleanArray selectedBl;
     private LayoutInflater mLayoutInflater;
 
     private BluetoothManager blmanager;
-    // ListBl과 dataArrayList가 null일 가능성도 나중에 추가
+
+
+
+
     public ListBlAdapter(Context context, ArrayList<ListBl> dataArrayList, BluetoothManager bluetoothManager){
         this.context = context;
         this.list = dataArrayList;
@@ -40,7 +46,6 @@ public class ListBlAdapter extends BaseAdapter {
         this.blmanager = bluetoothManager;
         mLayoutInflater = LayoutInflater.from(context);
 
-        selectedBl = new SparseBooleanArray(list.size());
     }
 
 
@@ -64,20 +69,25 @@ public class ListBlAdapter extends BaseAdapter {
         com.google.android.material.imageview.ShapeableImageView iv = view.findViewById(R.id.listImage);
         TextView txt = view.findViewById(R.id.listName);
 
+
         SwitchCompat switchBl = view.findViewById(R.id.switch1);
-        switchBl.setChecked(selectedBl.get(position, false));
+        switchBl.setChecked(list.get(position).getChecked());
+
         switchBl.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     Log.d("switch check", "checked");
                     if (context instanceof BluetoothActivity) {
-                        for (int i = 0; i < selectedBl.size(); i++) {
-                            selectedBl.put(i, i == position);  // 현재 스위치만 켜고 나머지는 끄기
+                        for (int i = 0; i < list.size(); i++) {
+                            list.get(i).setChecked(i == position);  // 현재 스위치만 켜고 나머지는 끄기
                         }
+
+
                         //서비스 호출
                         Intent intent = new Intent(context, BluetoothService.class);
                         intent.putExtra("BluetoothDevice",list.get(position).getName());
+
                         if (ActivityCompat.checkSelfPermission(
                                 context,
                                 android.Manifest.permission.POST_NOTIFICATIONS
@@ -91,11 +101,10 @@ public class ListBlAdapter extends BaseAdapter {
                             );
                         } else {
                             // 이미 권한이 있으면 서비스 시작
-                            context.startService(intent);
+                           context.startForegroundService(intent);
+//                            context.startService(intent);
                         }
-                        //이거 뷰에서 컨텍스트 얻어올수있는거 맞지?
-                        // 그럼  if문에서 막혀서 연결이 안되야 하는데 연결은 가능...
-//                        blmanager.connectSelectedDevice(list.get(position).getName());
+
                         notifyDataSetChanged();
                     }
                 }
@@ -107,5 +116,6 @@ public class ListBlAdapter extends BaseAdapter {
 
         return view;
     }
+
 
 }

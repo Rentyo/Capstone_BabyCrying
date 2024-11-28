@@ -18,6 +18,8 @@
     <!-- 알림 기능 -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
+    <!-- ForeGround Service -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
         android:name=".BluetoothApplication"

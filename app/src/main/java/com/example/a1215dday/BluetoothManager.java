@@ -21,6 +21,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.example.a1215dday.room.BabyCryLogoDB;
+import com.example.a1215dday.room.BabyCryLogoDao;
+import com.example.a1215dday.room.BabyCryLogoData;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -51,6 +55,7 @@ public class BluetoothManager {
     // 알림
     private static String CHANNEL_ID = "baby_crying_detect";
 
+
     final static String notiTitle = "Hear4You 감지";
     final static String notiText = "아이 울음 소리가 감지되었습니다.";
     final static String notiTextbel = "아이 울음 소리 종류는 복통입니다.";
@@ -59,8 +64,14 @@ public class BluetoothManager {
     final static String notiTexttir = "아이 울음 소리 종류는 피곤함입니다.";
     NotificationCompat.Builder builder;
 
+    BabyCryLogoDB db =  BluetoothApplication.getDatabase();
+    BabyCryLogoDao dataDao = db.BabyCryDao();;
+
+    String tempUserId = "tempUser";
+
     private BluetoothManager() {
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
 
         mBluetoothHandler = new Handler(Looper.getMainLooper()){
             public void handleMessage(android.os.Message msg){
@@ -97,6 +108,7 @@ public class BluetoothManager {
                             try{
                                 //NOTIFIYCATION ID 101
                                 notificationManagerCompat.notify(102, builder.build());
+                                saveData(0, formattedDateTime, tempUserId); // type 1
                             }catch (SecurityException e){
                                 Log.d("알림 오류", e.toString());
                             }
@@ -108,6 +120,7 @@ public class BluetoothManager {
                             try{
                                 //NOTIFIYCATION ID 101
                                 notificationManagerCompat.notify(103, builder.build());
+                                saveData(1, formattedDateTime, tempUserId); // type 1
                             }catch (SecurityException e){
                                 Log.d("알림 오류", e.toString());
                             }
@@ -119,6 +132,7 @@ public class BluetoothManager {
                             try{
                                 //NOTIFIYCATION ID 101
                                 notificationManagerCompat.notify(104, builder.build());
+                                saveData(2, formattedDateTime, tempUserId); // type 1
                             }catch (SecurityException e){
                                 Log.d("알림 오류", e.toString());
                             }
@@ -130,6 +144,7 @@ public class BluetoothManager {
                             try{
                                 //NOTIFIYCATION ID 101
                                 notificationManagerCompat.notify(105, builder.build());
+                                saveData(3, formattedDateTime, tempUserId); // type 1
                             }catch (SecurityException e){
                                 Log.d("알림 오류", e.toString());
                             }
@@ -139,6 +154,19 @@ public class BluetoothManager {
                 }
             }
         };
+    }
+
+    private void saveData(int type, String dateTime, String userId) {
+        String[] parts = dateTime.split(" ");
+        String date = parts[0];
+        String time = parts[1];
+
+        BabyCryLogoData data = new BabyCryLogoData();
+        data.setCryType(type);
+        data.setUserId(userId);
+        data.setDateYMD(date);
+        data.setTimeHMS(time);
+        dataDao.insertBabyCryLogo(data);
     }
     public void createNotificationChannel(Context context) {
         // Create the NotificationChannel, but only on API 26+ because
@@ -195,13 +223,7 @@ public class BluetoothManager {
         }
     }
     void connectSelectedDevice(String selectedDeviceName, Service service) {
-//
-//        Intent intent = new Intent(context, BluetoothActivity.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
-
         this.service = service;
-
         BluetoothDevice mBluetoothDevice = null;
         for(BluetoothDevice tempDevice : deviceSet) {
             try {
