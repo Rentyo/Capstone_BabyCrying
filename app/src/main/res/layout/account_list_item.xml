@@ -1,61 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/account_log_num"
-        android:layout_width="0dp"
-        app:layout_constraintHorizontal_weight="1"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/account_log_datetime"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        android:padding="5dp"
-        android:textAlignment="center"
-        android:text="123"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        android:textStyle="bold"/>
 
-    <TextView
-        android:id="@+id/account_log_datetime"
-        android:layout_width="0dp"
-        app:layout_constraintHorizontal_weight="1.5"
+    <View
+        android:layout_width="10dp"
+        android:layout_height="match_parent"
+        android:background="@color/accountLogView"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/account_log_num"
-        app:layout_constraintRight_toLeftOf="@id/account_log_logdata"
-        android:padding="5dp"
         android:layout_margin="10dp"
-        android:textAlignment="center"
-        android:text="english"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        android:textStyle="bold"/>
-
-
-    <TextView
-        android:id="@+id/account_log_logdata"
-        android:layout_width="0dp"
-        app:layout_constraintHorizontal_weight="3"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/account_log_datetime"
-        android:padding="5dp"
-        android:layout_margin="10dp"
-        android:textAlignment="center"
-        android:text="phone"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        android:textStyle="bold" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:backgroundTint="@color/accountLogItem"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <TextView
+                android:id="@+id/account_log_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:text="Title"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/account_log_datetime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:text="text"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/account_log_logdata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:text="glg"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

@@ -15,29 +15,149 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/FragmentBackground">
 
-
-            <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/chart"
+            <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:layout_margin="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
+                android:layout_height="wrap_content"
+                android:fillViewport="true"
+                android:scrollbars="horizontal"
+                android:importantForAccessibility="no"
+                >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="500dp"
+                        android:layout_margin="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </LinearLayout>
+            </HorizontalScrollView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right">
+            <Button
+                android:id="@+id/statisticsDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 날짜 선택 "></Button>
             <Button
                 android:id="@+id/chartChanger"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
                 android:text=" 그래프 범위 선택 "
                 />
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/selectedDate_Total"
+                android:text="Additional information or description goes here."
+                android:padding="10dp"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
 
+                android:orientation="vertical"
+                android:background="@drawable/tabledesign">
+                <!-- Row 1 -->
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="복통"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:background="@drawable/table_inborder"
+                        />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="불편함"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:background="@drawable/table_inborder2"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="배고픔"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:background="@drawable/table_inborder3"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="피곤함"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:background="@drawable/table_inborder4"/>
+                </TableRow>
 
+                <!-- Row 2 -->
+                <TableRow
+                    >
+                    <TextView
+                        android:id="@+id/table_bellypain"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textAlignment="center"
+                        android:background="@drawable/table_inborder"/>
+                    <TextView
+                        android:id="@+id/table_discomfort"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:textAlignment="center"
+                        android:background="@drawable/table_inborder2"/>
+                    <TextView
+                        android:id="@+id/table_hungry"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="3"
+                        android:textAlignment="center"
+                        android:background="@drawable/table_inborder3"/>
+                    <TextView
+                        android:id="@+id/table_tired"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="4"
+                        android:textAlignment="center"
+                        android:background="@drawable/table_inborder4"/>
+                </TableRow>
+
+            </TableLayout>
+            <TextView
+                android:id="@+id/difference"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Additional information or description goes here."
+                android:padding="10dp"
+                android:textSize="16sp" />
         </LinearLayout>
 
 

@@ -51,9 +51,9 @@ public class ListAccountLogAdapter extends RecyclerView.Adapter<ListAccountLogAd
         holder.date.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
         holder.log.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
 
-        holder.id.setGravity(Gravity.CENTER);
-        holder.date.setGravity(Gravity.CENTER);
-        holder.log.setGravity(Gravity.CENTER);
+        holder.id.setGravity(Gravity.LEFT);
+        holder.date.setGravity(Gravity.LEFT);
+        holder.log.setGravity(Gravity.LEFT);
 
 
 

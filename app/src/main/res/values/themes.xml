@@ -23,6 +23,26 @@
 <!--        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>-->
     </style>
 
+    <!-- 캘린더 스타일 -->
+    <style name="MySpinnerDatePickerStyle" parent="Theme.AppCompat.Light.Dialog">
+        <!-- 상단 색 변경 -->
+        <item name="colorAccent">@color/headerbackground</item>
+        <!-- dialog의 배경 변경 -->
+        <item name="android:windowBackground">@color/calendarBackground</item>
+        <!-- 선택한 날짜를 표시할 색상 -->
+        <item name="colorControlActivated">@color/selectedDay</item>
+        <!-- MONTH(Day), WEEK -->
+        <item name="android:textColorPrimary">@color/daysMonth</item>
+        <item name="android:textColorSecondary">@color/daysWeek</item>
+        <!-- 취소/확인버튼 색상 -->
+        <item name="android:textColor">@color/buttonCalender</item>
+    </style>
+
+
+
+
+
+
     <style name="roundImage">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50dp</item>

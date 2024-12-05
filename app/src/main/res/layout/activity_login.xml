@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/splashBackground">
     <ImageView
         android:id="@+id/App_Icon"
         android:contentDescription="@null"
@@ -23,7 +24,7 @@
         android:fontFamily="@font/font_title"
         android:layout_marginStart="10sp"
         android:textSize="25sp"
-        android:textColor="#000000"
+        android:textColor="#4A4947"
         />
     <EditText
         android:importantForAutofill="no"
@@ -39,6 +40,9 @@
         android:inputType="text"
         android:maxLength="15"
         android:ems="15"
+        android:background="@color/loginText"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         />
     <EditText
         android:importantForAutofill="no"
@@ -54,6 +58,9 @@
         android:maxLength="15"
         android:ems="15"
         android:inputType="textPassword"
+        android:background="@color/loginText"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         />
     <LinearLayout
         android:layout_marginTop="5sp"
@@ -90,14 +97,14 @@
         <TextView
             android:id="@+id/login_new"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="아직 회원이 아니신가요?"
-            android:textColor="#000000"
-            android:textSize="18sp"
+            android:layout_weight="1"
             android:fontFamily="@font/font_content"
             android:gravity="start"
-            />
+            android:text="아직 회원이 아니신가요?"
+            android:textColor="#914F1E"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/login_forget"
@@ -105,10 +112,11 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="회원 정보가 기억이 안나나요?"
-            android:textColor="#000000"
+            android:textColor="#914F1E"
             android:textSize="18sp"
             android:fontFamily="@font/font_content"
             android:gravity="end"
+            android:textStyle="bold"
             />
     </LinearLayout>
 

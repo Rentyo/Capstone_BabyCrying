@@ -42,8 +42,7 @@ public class FragmentActivity extends AppCompatActivity{
             }
         });
 
-        pagerAdapter.createFragment(0);
-        pagerAdapter.createFragment(1);
+
         viewPager2.setAdapter(pagerAdapter);
         viewPager2.setUserInputEnabled(false);
         // 리스너 연결

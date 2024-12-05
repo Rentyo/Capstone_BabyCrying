@@ -187,18 +187,9 @@ public class BluetoothActivity extends ComponentActivity {
     // Create a BroadcastReceiver
     @Override
     protected void onDestroy() {
-        //Toast.makeText(getApplicationContext(), "onDestroy called", Toast.LENGTH_SHORT).show();
-        Log.d("onDestroy", String.valueOf(blManager.getBluetoothSocket().isConnected()));
-        try{
-            Log.d("onDestroy", String.valueOf(blManager.getBluetoothSocket().getInputStream()));
-            Log.d("onDestroy", String.valueOf(blManager.getBluetoothSocket().getOutputStream()));
-        }
-        catch (IOException e){
-            Log.d("onDestroy" , e.toString());
-        }
         super.onDestroy();
+        //Toast.makeText(getApplicationContext(), "onDestroy called", Toast.LENGTH_SHORT).show();
         unregisterReceiver(mBroadCastReceiver);
-        //mThreadConnectedBluetooth.cancel();
     }
     @Override
     protected void onPause() {

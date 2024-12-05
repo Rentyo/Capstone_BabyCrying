@@ -11,4 +11,20 @@
     <color name="grayBlue">#6699CC</color>
     <color name="menuGray">#adb5bd</color>
     <color name="menuWhite">#E5E5E5</color>
+    <color name="accountUser">#EEE3CB</color>
+    <color name="accountAlarm">#DFD3C3</color>
+    <color name="accountLog">#AD8B73</color>
+    <color name="accountLogItem">#CEAB93</color>
+    <color name="accountLogView">#E3CAA5</color>
+    <color name="FragmentBackground">#FFFBE9</color>
+    <color name="headerbackground">#DEAA79</color>
+    <color name="calendarBackground">#FFE6A9</color>
+    <color name="selectedDay">#B1C29E</color>
+    <color name="daysMonth">#1E212D</color>
+    <color name="daysWeek">#6F4C5B</color>
+    <color name="buttonCalender">#FFB38E</color>
+    <color name="splashBackground">#CBD2A4</color>
+    <color name="loginText">#F6F1EE</color>
+    <color name="tablebackground">#967E76</color>
+
 </resources>
