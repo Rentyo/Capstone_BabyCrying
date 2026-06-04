@@ -7,7 +7,6 @@ Raspberry Pi와 USB 마이크를 통해 아이 울음소리를 수집하고, AI 
 
 ## 🔗 Related Repository
 
-* Android App Repository: [Capstone_BabyCrying](https://github.com/Rentyo/Capstone_BabyCrying)
 * Raspberry Pi Repository: [RaspberryPiBabyCrying](https://github.com/Rentyo/RaspberryPiBabyCrying)
 
 <br>
