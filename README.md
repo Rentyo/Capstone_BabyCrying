@@ -5,12 +5,6 @@ Raspberry Pi와 USB 마이크를 통해 아이 울음소리를 수집하고, AI 
 
 <br>
 
-## 🔗 Related Repository
-
-* Raspberry Pi Repository: [RaspberryPiBabyCrying](https://github.com/Rentyo/RaspberryPiBabyCrying)
-
-<br>
-
 ## 📌 프로젝트 개요
 
 청각장애 보호자는 아이의 울음소리를 즉각적으로 인지하기 어렵기 때문에, 아이가 울고 있는 상황을 놓칠 수 있습니다.
@@ -257,6 +251,19 @@ Room DB에 감지 로그 저장
 * 실제 사용 환경을 고려한 알림 흐름 설계
 
 <br>
+
+## 🍓 Raspberry Pi와의 연동
+
+본 Android 앱 프로젝트는 Raspberry Pi 저장소와 함께 동작합니다.
+
+Raspberry Pi는 LM393 사운드 센서와 USB 마이크를 활용해 아이 울음소리를 감지하고, AI 모델을 통해 울음 원인을 분류합니다. 이후 분류 결과를 Bluetooth 메시지로 Android 앱에 전송합니다.
+
+Android 앱은 Raspberry Pi에서 전송한 Bluetooth 메시지를 수신하고, 수신된 값에 따라 보호자에게 울음 감지 및 원인 분류 알림을 표시합니다.
+
+Raspberry Pi 저장소는 아래 링크에서 확인할 수 있습니다.
+
+👉 [RaspberryPiBabyCrying](https://github.com/Rentyo/RaspberryPiBabyCrying)
+
 
 ## 🚀 실행 방법
 
