@@ -5,6 +5,13 @@ Raspberry Pi와 USB 마이크를 통해 아이 울음소리를 수집하고, AI 
 
 <br>
 
+## 🔗 Related Repository
+
+* Android App Repository: [Capstone_BabyCrying](https://github.com/Rentyo/Capstone_BabyCrying)
+* Raspberry Pi Repository: [RaspberryPiBabyCrying](https://github.com/Rentyo/RaspberryPiBabyCrying)
+
+<br>
+
 ## 📌 프로젝트 개요
 
 청각장애 보호자는 아이의 울음소리를 즉각적으로 인지하기 어렵기 때문에, 아이가 울고 있는 상황을 놓칠 수 있습니다.
