@@ -3,6 +3,8 @@
 청각장애 보호자를 위한 **아이 울음소리 감지 및 원인 분류 알림 서비스**입니다.
 Raspberry Pi와 USB 마이크를 통해 아이 울음소리를 수집하고, AI 모델이 울음 원인을 분류한 뒤 Android 앱으로 보호자에게 알림을 전달하는 것을 목표로 개발했습니다.
 
+[아이울음소리 AI&자르베리파이](https://github.com/사용자명/리포지토리명](https://github.com/Rentyo/RaspberryPiBabyCrying)
+
 <br>
 
 ## 📌 프로젝트 개요
